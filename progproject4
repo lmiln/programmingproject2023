@@ -50,8 +50,6 @@ fd = fopen(fileName,'w');
 KbName('UnifyKeyNames');
 %Here the experiment starts in try…catch to make sure we save the data if something happens during the experiment
 
-% Setting up the conditions;
-num_trials = 80; % can be changed to anything that can be divided by 8
 
 equal_cue = [zeros(1, 3*num_trials/4), ones(1, num_trials/4)]; % 0: Invalid Cue, 1: Valid Cue
 
