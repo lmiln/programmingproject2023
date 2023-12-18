@@ -11,7 +11,7 @@ end
 
 fileName=['PosnerexpSubj_' num2str(subID) '.csv'];
 
-%number of trials (you can change it)!!!!!!!!
+%number of trials
 num_trials = 80;
 
 % Define column headers
