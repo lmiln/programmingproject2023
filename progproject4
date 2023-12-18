@@ -103,7 +103,7 @@ try
 
     %Preparing the visual stimuli
 
-    baseRect = [0 0 200 200]; %dimensions of the square
+    baseRect = [0 0 200 200]; %dimensions of the square frame
     L_square = CenterRectOnPointd(baseRect, screenWidth/4, screenHeight/2); %center points of the square
     R_square = CenterRectOnPointd(baseRect, 3*screenWidth/4, screenHeight/2); %%center points of the square
     square_Color = [0 0 0]; %black
@@ -115,12 +115,18 @@ try
     cue_color = [0 0 0]; %black
     target_color = [255 0 0]; %red
 
+    %Preparing the fixation cross
+    FixCr=ones(20,20)*255;
+    FixCr(10:11,:)=0;
+    FixCr(:,10:11)=0;  %try imagesc(FixCr) to display the result in Matlab
+    fixcross = Screen('MakeTexture',expWin,FixCr);
+
     % Welcome screen
     Screen('TextSize', expWin, 32);
 
     welcomeText = 'Press the buttons A (LEFT) or L (RIGHT) \n depending on where the RED circle appears on your screen.\n Please ignore the BLACK circles. \n \n \n Please press one of these buttons (A or L) to START.';
 
-    % Draw the welcome text, in the center of the window:
+    % Draw the welcome text, at the center of the window:
     DrawFormattedText(expWin, welcomeText, 'center', 'center', [255 0 0]);
 
     % Display the welcome text:
@@ -137,18 +143,13 @@ try
     
 
     % Loop through trials
-    FixCr=ones(20,20)*255;
-    FixCr(10:11,:)=0;
-    FixCr(:,10:11)=0;  %try imagesc(FixCr) to display the result in Matlab
-    fixcross = Screen('MakeTexture',expWin,FixCr);
-   
     for trial = 1:num_trials
-   % Display fixation point
+    % Display fixation point
        Screen('DrawTexture', expWin, fixcross,[],[mx-20,my-20,mx+20,my+20]); % Prepare fixation cross
        tfixation = Screen('Flip', expWin, [], 1); % Flip the screen to show fixation cross
        WaitSecs(1); % Display fixation for 1 second
 
-   % Display squares on R and L
+    % Display squares on R and L
        Screen('FrameRect', expWin, square_Color, R_square, 4);
        Screen('FrameRect', expWin, square_Color, L_square, 4);
        Screen('Flip', expWin, [], 1);
